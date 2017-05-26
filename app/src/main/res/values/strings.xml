@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Marvel Heroes</string>
     <string name="copyright_marvel">Copyright Marvel</string>
+    <string name="network_error_message">Error de red. ¿Tratar nuevamente?</string>
+    <string name="service_error_message">Error con el servidor. ¿Tratar nuevamente?</string>
+    <string name="ok">Ok</string>
+    <string name="no_information_message">No hay información disponible</string>
 </resources>

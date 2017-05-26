@@ -18,13 +18,13 @@ import java.util.ArrayList;
  * Created by LUIS on 20/05/2017.
  */
 
-public class HeroAdapter extends RecyclerView.Adapter<HeroAdapter.MyViewHolder>{
+public class HeroListAdapter extends RecyclerView.Adapter<HeroListAdapter.MyViewHolder>{
 
     ArrayList<SuperHero> superHeroArrayList;
     Context context;
     HeroListFragment.HeroClickListener heroClickListener;
 
-    public HeroAdapter(ArrayList superHeroArrayList, Context context, HeroListFragment.HeroClickListener heroClickListener){
+    public HeroListAdapter(ArrayList superHeroArrayList, Context context, HeroListFragment.HeroClickListener heroClickListener){
 
         this.superHeroArrayList = superHeroArrayList;
         this.context = context;

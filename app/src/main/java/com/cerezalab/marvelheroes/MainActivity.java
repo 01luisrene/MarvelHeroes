@@ -24,6 +24,7 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity {
 
     private static final String HERO_LIST_FRAGMENT = "hero_list_fragment";
+    public static final String HER0_GRID_FRAGMENT ="hero_grid_fragment";
     private static final String TAG = MainActivity.class.getSimpleName();
     public static final int SUCCESS_CODE = 200;
     public static final String HERO_LIST = "hero_list";
@@ -58,32 +59,50 @@ public class MainActivity extends AppCompatActivity {
 
                     superHeroes = response.body().getData().getResults();
 
-                    Toast.makeText(MainActivity.this, "Hero Name: " + superHeroes.get(0).getName(), Toast.LENGTH_SHORT).show();
-
                     //Bundle
                     Bundle bundle = new Bundle();
                     bundle.putParcelableArrayList(HERO_LIST, superHeroes);
 
                     FragmentManager fragmentManager = getSupportFragmentManager();
 
-                    HeroListFragment savedFragment = (HeroListFragment) fragmentManager.findFragmentByTag(HERO_LIST_FRAGMENT);
+                    boolean is_tablet = getResources().getBoolean(R.bool.is_tablet);
 
-                    if(savedFragment == null){
-                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    if(is_tablet){
 
-                        HeroListFragment heroListFragment = new HeroListFragment();
+                        HeroGridFragment savedFragment = (HeroGridFragment) fragmentManager.findFragmentByTag(HER0_GRID_FRAGMENT);
 
-                        heroListFragment.setArguments(bundle);
+                        if(savedFragment == null){
+                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-                        fragmentTransaction.add(R.id.placeholder, heroListFragment, HERO_LIST_FRAGMENT);
+                            HeroGridFragment heroGridFragment = new HeroGridFragment();
 
-                        fragmentTransaction.commit();
+                            heroGridFragment.setArguments(bundle);
+
+                            fragmentTransaction.add(R.id.placeholder, heroGridFragment, HER0_GRID_FRAGMENT);
+
+                            fragmentTransaction.commit();
+                        }
+                    } else {
+                        HeroListFragment savedFragment = (HeroListFragment) fragmentManager.findFragmentByTag(HERO_LIST_FRAGMENT);
+
+                        if(savedFragment == null){
+                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                            HeroListFragment heroListFragment = new HeroListFragment();
+
+                            heroListFragment.setArguments(bundle);
+
+                            fragmentTransaction.add(R.id.placeholder, heroListFragment, HERO_LIST_FRAGMENT);
+
+                            fragmentTransaction.commit();
+                        }
                     }
+
 
                 }else{
 
 
-                    displayErrorMessage("Error con el servidor. ¿Tratar nuevamente?");
+                    displayErrorMessage(getString(R.string.service_error_message));
 
                 }
 
@@ -92,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<Basic<Data<ArrayList<SuperHero>>>> call, Throwable t) {
 
-                displayErrorMessage("Error de red. ¿Tratar nuevamente?");
+                displayErrorMessage(getString(R.string.network_error_message));
 
             }
         });
@@ -101,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
     public void displayErrorMessage(String message){
 
         Snackbar snackbar = Snackbar.make(frameLayout, message, Snackbar.LENGTH_INDEFINITE)
-                .setAction("Ok", new View.OnClickListener() {
+                .setAction(R.string.ok, new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         getHeroList();

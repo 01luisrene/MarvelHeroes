@@ -30,11 +30,10 @@ public class HeroDetailFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (getArguments() != null) {
 
             superHero = getArguments().getParcelable(HeroListFragment.SUPER_HERO);
-
-            Toast.makeText(getContext(), "Heroe Obtenido: " + superHero.getName(), Toast.LENGTH_SHORT).show();
 
         }
     }
@@ -52,7 +51,12 @@ public class HeroDetailFragment extends Fragment {
         heroPictureImageView = (ImageView) view.findViewById(R.id.heroDetailThumbnailTextView);
 
         heroNameTextView.setText(superHero.getName());
-        heroDescriptionTextView.setText(superHero.getDescription());
+
+        if(superHero.getDescription() != null && !superHero.getDescription().isEmpty())
+            heroDescriptionTextView.setText(superHero.getDescription());
+        else
+            heroDescriptionTextView.setText(getString(R.string.no_information_message));
+
         Picasso.with(getContext()).load(superHero.getThumbnail().getFullPath()).into(heroPictureImageView);
 
         return view;
