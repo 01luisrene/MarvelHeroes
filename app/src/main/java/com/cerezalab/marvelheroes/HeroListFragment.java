@@ -21,6 +21,7 @@ import java.util.ArrayList;
 public class HeroListFragment extends Fragment {
 
     public static final String HERO_DETAIL_FRAGMENT = "HERO_DETAIL_FRAGMENT";
+    public static final String SUPER_HERO = "SUPER_HERO";
     private RecyclerView recyclerView;
 
     public static final String TAG = HeroListFragment.class.getSimpleName();
@@ -40,6 +41,8 @@ public class HeroListFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Log.d(TAG, "Fragment de super heroes creado");
 
         Bundle bundle = getArguments();
         superHeroes = bundle.getParcelableArrayList(MainActivity.HERO_LIST);
@@ -80,6 +83,12 @@ public class HeroListFragment extends Fragment {
         Toast.makeText(getContext(), "Hero Clicked: " + superHero.getName(), Toast.LENGTH_SHORT).show();
 
         HeroDetailFragment heroDetailFragment = new HeroDetailFragment();
+
+        Bundle bundle = new Bundle();
+
+        bundle.putParcelable(SUPER_HERO, superHero);
+
+        heroDetailFragment.setArguments(bundle);
 
         FragmentManager fragmentManager = getFragmentManager();
 

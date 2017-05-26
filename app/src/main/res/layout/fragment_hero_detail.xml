@@ -1,13 +1,58 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context="com.cerezalab.marvelheroes.HeroDetailFragment"
-             android:background="#991111">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:context="com.cerezalab.marvelheroes.HeroDetailFragment"
+                tools:background="#504a4a">
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment"/>
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/heroDetailTitleTextView"
+        tools:text="Hulk"
+        android:textSize="24sp"
+        android:textColor="@color/colorText"
+        android:textStyle="normal|bold"/>
 
-</FrameLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_margin="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/heroDetailTitleTextView"
+        android:id="@+id/baseLinearLayout">
+
+        <ImageView
+            app:srcCompat="@color/colorPrimaryDark"
+            android:id="@+id/heroDetailThumbnailTextView"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:layout_width="100dp"
+            android:scaleType="fitCenter"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/heroDetailCopyrightTextView"
+            android:textSize="14sp"
+            android:layout_marginLeft="8dp"
+            android:text="@string/copyright_marvel"
+            tools:text="Copyright Marvel"
+            android:textColor="@color/colorText"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/heroDetailDescriptionTextView"
+        android:layout_below="@+id/baseLinearLayout"
+        android:textColor="@color/colorText"
+        android:layout_margin="8dp"
+        tools:text="Nobody messes with the Hulk"/>
+
+</RelativeLayout>
